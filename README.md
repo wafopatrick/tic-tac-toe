@@ -1,59 +1,78 @@
-# TicTacToe
+# Tic Tac Toe Game
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
+A modern implementation of the classic Tic Tac Toe game built with Angular 19, featuring both human vs. human and human vs. AI gameplay modes.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- **Multiple Game Modes**:
+    - Human vs. Human
+    - Human vs. AI with three difficulty levels:
+        - Easy: Random moves
+        - Medium: Strategic blocking
+        - Hard: Unbeatable AI using minimax algorithm
 
+- **Accessibility**:
+    - Full keyboard navigation support
+    - Clear visual feedback
+    - ARIA labels for screen readers
+
+- **Responsive Design**:
+    - Built with Tailwind CSS
+    - Mobile-friendly interface
+    - Clean and modern UI
+
+## Technologies Used
+
+- Angular 19
+- TypeScript
+- Tailwind CSS
+- Font Awesome
+- RxJS
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS version)
+- npm (comes with Node.js)
+
+### Installation
+
+1. Clone the repository:
 ```bash
-ng serve
+git clone [repository-url]
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+2. Install dependencies:
 ```bash
-ng generate component component-name
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+3. Start the development server:
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
+4. Open your browser and navigate to:
+```
+http://localhost:4200
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## How to Play
 
-## Running unit tests
+1. Select your preferred game mode (Human vs. Human or Human vs. AI)
+2. If playing against AI, choose the difficulty level by clicking the AI button
+3. Players take turns clicking cells to place their mark (X or O)
+4. First player to get three in a row (horizontally, vertically, or diagonally) wins
+5. Use the Reset button to start a new game
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Development
 
-```bash
-ng test
-```
+- Built using standalone Angular components
+- Implements intelligent AI using the minimax algorithm
+- Uses dependency injection for game state management
+- Features responsive Tailwind CSS styling
 
-## Running end-to-end tests
+## License
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT License - see the LICENSE file for details.

@@ -1,0 +1,25 @@
+<div class="flex flex-col items-center space-y-2">
+  <!-- Game Mode Selection -->
+  <div class="flex space-x-4">
+    <button
+      class="px-4 py-2 rounded w-60"
+      [ngClass]="{
+        'bg-blue-700 text-white': selectedMode === 'Human vs Human',
+        'bg-gray-500 text-black': selectedMode !== 'Human vs Human'
+      }"
+      (click)="selectMode('Human vs Human')"
+    >
+      Human vs Human
+    </button>
+    <button
+      class="px-4 py-2 rounded w-60"
+      [ngClass]="{
+        'bg-blue-700 text-white': selectedMode === 'Human vs AI',
+        'bg-gray-500 text-black': selectedMode !== 'Human vs AI'
+      }"
+      (click)="selectMode('Human vs AI')"
+    >
+      {{ selectedMode === 'Human vs AI' ? 'Human vs AI (' + selectedLevel + ')' : 'Human vs AI (Easy)' }}
+    </button>
+  </div>
+</div>

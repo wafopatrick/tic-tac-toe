@@ -1,0 +1,9 @@
+<div class="flex justify-center p-4">
+  <!-- Menu for Game Mode and AI Level -->
+  <app-menu 
+    (gameModeChange)="onGameModeChange($event)"
+  ></app-menu>
+</div>
+
+<!-- Board Component -->
+<app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
