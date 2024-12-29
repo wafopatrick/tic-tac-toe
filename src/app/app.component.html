@@ -1,28 +1,33 @@
-<div class="flex">
-  <!-- Navigation Menu for Game Mode -->
-  <div class="p-4 fixed top-0 left-0">
-    <app-menu (gameModeChange)="onGameModeChange($event)"></app-menu>
-  </div>
-
-  <!-- Main Content -->
-  <div class="flex-1 p-4 ml-48">
-    <!-- AI Level Selection (only visible when 'Human vs AI' is selected) -->
-    <div *ngIf="gameMode === GameMode.HumanVsAI" class="flex justify-center space-x-4 mt-4">
-      <label>
-        <input type="radio" name="aiLevel" [value]="AILevel.Easy" [(ngModel)]="aiLevel" (change)="onAILevelChange(AILevel.Easy)" />
-        Easy
-      </label>
-      <label>
-        <input type="radio" name="aiLevel" [value]="AILevel.Medium" [(ngModel)]="aiLevel" (change)="onAILevelChange(AILevel.Medium)" />
-        Medium
-      </label>
-      <label>
-        <input type="radio" name="aiLevel" [value]="AILevel.Hard" [(ngModel)]="aiLevel" (change)="onAILevelChange(AILevel.Hard)" />
-        Hard
-      </label>
+<div class="flex min-h-screen">
+    <!-- Navigation Menu for Game Mode -->
+    <div class="p-4 fixed top-0 left-0">
+        <app-menu (gameModeChange)="onGameModeChange($event)"></app-menu>
     </div>
 
-    <!-- Board Component -->
-    <app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
-  </div>
+    <!-- Main Content -->
+    <div class="flex-1 flex justify-center items-center p-4">
+        <div class="flex flex-col items-center">
+            <!-- AI Level Selection (only visible when 'Human vs AI' is selected) -->
+            <div *ngIf="gameMode === GameMode.HumanVsAI" class="flex justify-center space-x-4 mt-4">
+                <label>
+                    <input type="radio" name="aiLevel" [value]="AILevel.Easy" [(ngModel)]="aiLevel"
+                        (change)="onAILevelChange(AILevel.Easy)" />
+                    Easy
+                </label>
+                <label>
+                    <input type="radio" name="aiLevel" [value]="AILevel.Medium" [(ngModel)]="aiLevel"
+                        (change)="onAILevelChange(AILevel.Medium)" />
+                    Medium
+                </label>
+                <label>
+                    <input type="radio" name="aiLevel" [value]="AILevel.Hard" [(ngModel)]="aiLevel"
+                        (change)="onAILevelChange(AILevel.Hard)" />
+                    Hard
+                </label>
+            </div>
+
+            <!-- Board Component -->
+            <app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
+        </div>
+    </div>
 </div>
