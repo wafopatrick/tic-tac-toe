@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service'; // Import the service
 import { CommonModule } from '@angular/common';
+import { GameMode, AILevel } from '../../constants';
 
 @Component({
   standalone: true,
@@ -10,8 +11,8 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./board.component.css'],
 })
 export class BoardComponent implements OnInit {
-  @Input() gameMode: string = 'Human vs Human'; // Default to 'Human vs Human' if not passed
-  @Input() aiLevel: string = 'Easy'; // Default to 'Easy' if not passed
+  @Input() gameMode: GameMode = GameMode.HumanVsHuman; // Default to 'Human vs Human' if not passed
+  @Input() aiLevel: AILevel = AILevel.Easy; // Default to 'Easy' if not passed
 
   selectedRow: number = 0; // Track the selected row (starting at the top-left cell)
   selectedCol: number = 0; // Track the selected column (starting at the top-left cell)
@@ -25,7 +26,7 @@ export class BoardComponent implements OnInit {
 
   // Method to set up the game mode
   setupGameMode() {
-    if (this.gameMode === 'Human vs AI') {
+    if (this.gameMode === GameMode.HumanVsAI) {
       this.gameService.setGameMode(this.gameMode); // Set the AI Mode
       this.gameService.setAILevel(this.aiLevel); // Set the AI difficulty level
     }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GameMode, AILevel } from '../constants';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +8,8 @@ export class GameService {
   board: string[][] = [['', '', ''], ['', '', ''], ['', '', '']];
   winner: string | null = null;
   currentPlayer: string = 'X'; // Player 'X' starts
-  gameMode: string = 'Human vs Human'; // Default to playing against human
-  aiLevel: string = 'Easy'; // Default AI level
+  gameMode: GameMode = GameMode.HumanVsHuman; // Default to playing against human
+  aiLevel: AILevel = AILevel.Easy; // Default AI level
   winningCells: [number, number][] = []; // Track winning cells
 
   initializeBoard() {
@@ -19,12 +20,12 @@ export class GameService {
   }
 
   // Set the AI level (Easy, Medium, Hard)
-  setAILevel(level: string) {
+  setAILevel(level: AILevel) {
     this.aiLevel = level;
   }
 
   // Set the Game mode (Human vs Human, Human vs AI)
-  setGameMode(gameMode: string) {
+  setGameMode(gameMode: GameMode) {
     this.gameMode = gameMode;
   }
 
@@ -45,7 +46,7 @@ export class GameService {
     this.currentPlayer = this.currentPlayer === 'X' ? 'O' : 'X';
 
     // If game mode is AI and it's AI's turn, make an AI move
-    if (this.gameMode === 'Human vs AI' && this.currentPlayer === 'O') {
+    if (this.gameMode === GameMode.HumanVsAI && this.currentPlayer === 'O') {
       this.makeAIMove();
     }
   }
@@ -59,15 +60,15 @@ export class GameService {
 
     // Select move based on AI level
     switch (this.aiLevel) {
-      case 'Easy':
+      case AILevel.Easy:
         // Easy AI: Pick a random available cell
         [row, col] = this.getRandomMove();
         break;
-      case 'Medium':
+      case AILevel.Medium:
         // Medium AI: Try to block or make a random move
         [row, col] = this.getMediumMove();
         break;
-      case 'Hard':
+      case AILevel.Hard:
         // Hard AI: Implement a more intelligent strategy
         [row, col] = this.getHardMove();
         break;

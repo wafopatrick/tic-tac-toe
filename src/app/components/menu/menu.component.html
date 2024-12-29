@@ -4,22 +4,22 @@
     <button
       class="px-4 py-2 rounded w-60"
       [ngClass]="{
-        'bg-blue-700 text-white': selectedMode === 'Human vs Human',
-        'bg-gray-500 text-black': selectedMode !== 'Human vs Human'
+        'bg-blue-700 text-white': selectedMode === gameModes[0],
+        'bg-gray-500 text-black': selectedMode !== gameModes[0]
       }"
-      (click)="selectMode('Human vs Human')"
+      (click)="selectMode(gameModes[0])"
     >
-      Human vs Human
+      {{ gameModes[0] }}
     </button>
     <button
       class="px-4 py-2 rounded w-60"
       [ngClass]="{
-        'bg-blue-700 text-white': selectedMode === 'Human vs AI',
-        'bg-gray-500 text-black': selectedMode !== 'Human vs AI'
+        'bg-blue-700 text-white': selectedMode === gameModes[1],
+        'bg-gray-500 text-black': selectedMode !== gameModes[1]
       }"
-      (click)="selectMode('Human vs AI')"
+      (click)="selectMode(gameModes[1])"
     >
-      {{ selectedMode === 'Human vs AI' ? 'Human vs AI (' + selectedLevel + ')' : 'Human vs AI (Easy)' }}
+      {{ selectedMode === gameModes[1] ? gameModes[1] + ' (' + selectedLevel + ')' : gameModes[1] + ' (Easy)' }}
     </button>
   </div>
 </div>

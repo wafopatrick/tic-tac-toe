@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
+import { GameMode, AILevel } from '../../constants';
 
 @Component({
   standalone: true,
@@ -9,16 +10,16 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./menu.component.css'],
 })
 export class MenuComponent {
-  @Output() gameModeChange = new EventEmitter<{ mode: string; level?: string }>();
+  @Output() gameModeChange = new EventEmitter<{ mode: GameMode; level?: AILevel }>();
 
-  gameModes = ['Human vs Human', 'Human vs AI'];
-  levels = ['Easy', 'Medium', 'Hard'];
-  selectedMode = 'Human vs Human'; // Default game mode
-  selectedLevel = 'Easy'; // Default difficulty for AI
+  gameModes = [GameMode.HumanVsHuman, GameMode.HumanVsAI];
+  levels = [AILevel.Easy, AILevel.Medium, AILevel.Hard];
+  selectedMode: GameMode = GameMode.HumanVsHuman; // Default game mode
+  selectedLevel: AILevel = AILevel.Easy; // Default difficulty for AI
 
   // Emit the selected game mode and level (if AI is selected)
-  selectMode(mode: string) {
-    if (mode === 'Human vs AI') {
+  selectMode(mode: GameMode) {
+    if (mode === GameMode.HumanVsAI) {
       this.selectedMode = mode;
       this.selectedLevel = this.getNextLevel(this.selectedLevel);
       this.gameModeChange.emit({ mode, level: this.selectedLevel });
@@ -29,7 +30,7 @@ export class MenuComponent {
   }
 
   // Get the next level in the sequence
-  getNextLevel(currentLevel: string): string {
+  getNextLevel(currentLevel: AILevel): AILevel {
     const currentIndex = this.levels.indexOf(currentLevel);
     const nextIndex = (currentIndex + 1) % this.levels.length;
     return this.levels[nextIndex];

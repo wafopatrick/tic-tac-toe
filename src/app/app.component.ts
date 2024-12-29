@@ -2,27 +2,29 @@ import { Component } from '@angular/core';
 import { GameService } from './services/game.service';
 import { MenuComponent } from './components/menu/menu.component';
 import { BoardComponent } from './components/board/board.component';
+import { GameMode, AILevel } from './constants';
 
 @Component({
   selector: 'app-root',
-  imports: [MenuComponent, BoardComponent ],
+  standalone: true,
+  imports: [MenuComponent, BoardComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
   constructor(public gameService: GameService) {}
 
-  gameMode: string = 'Human vs Human'; // Default to Human vs Human
-  aiLevel: string = 'Easy'; // Default AI level
+  gameMode: GameMode = GameMode.HumanVsHuman; // Default to Human vs Human
+  aiLevel: AILevel = AILevel.Easy; // Default AI level
 
   // Handle game mode and AI level changes from the menu
-  onGameModeChange(event: { mode: string; level?: string }) {
+  onGameModeChange(event: { mode: GameMode; level?: AILevel }) {
     this.gameMode = event.mode;
     if (event.level) {
       this.aiLevel = event.level;
     }
     this.gameService.setGameMode(this.gameMode);
-    if (this.gameMode === 'Human vs AI') {
+    if (this.gameMode === GameMode.HumanVsAI) {
       this.gameService.setAILevel(this.aiLevel);
     }
   }
