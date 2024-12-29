@@ -52,6 +52,8 @@ export class GameService {
 
   // AI makes a move based on the selected level
   makeAIMove() {
+    if (this.isBoardFull()) return; // Do nothing if the board is full
+
     let row = -1;
     let col = -1;
 
