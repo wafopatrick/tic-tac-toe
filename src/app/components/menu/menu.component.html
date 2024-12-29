@@ -1,25 +1,31 @@
-<div class="flex flex-col items-center space-y-2">
-  <!-- Game Mode Selection -->
-  <div class="flex space-x-4">
-    <button
-      class="px-4 py-2 rounded w-60"
-      [ngClass]="{
-        'bg-blue-700 text-white': selectedMode === gameModes[0],
-        'bg-gray-500 text-black': selectedMode !== gameModes[0]
-      }"
-      (click)="selectMode(gameModes[0])"
-    >
-      {{ gameModes[0] }}
-    </button>
-    <button
-      class="px-4 py-2 rounded w-60"
-      [ngClass]="{
-        'bg-blue-700 text-white': selectedMode === gameModes[1],
-        'bg-gray-500 text-black': selectedMode !== gameModes[1]
-      }"
-      (click)="selectMode(gameModes[1])"
-    >
-      {{ selectedMode === gameModes[1] ? gameModes[1] + ' (' + selectedLevel + ')' : gameModes[1] + ' (Easy)' }}
-    </button>
-  </div>
+<div class="flex flex-col items-start space-y-2">
+  <h2 class="text-xl font-bold">Game Mode</h2>
+  <ul>
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 rounded"
+        [ngClass]="{
+          'font-bold': selectedMode === gameModes[0],
+          'text-black': selectedMode !== gameModes[0]
+        }"
+        (click)="selectMode(gameModes[0])"
+      >
+        Human vs Human
+      </a>
+    </li>
+    <li>
+      <a
+        href="#"
+        class="block px-4 py-2 rounded"
+        [ngClass]="{
+          'font-bold': selectedMode === gameModes[1],
+          'text-black': selectedMode !== gameModes[1]
+        }"
+        (click)="selectMode(gameModes[1])"
+      >
+        Human vs AI
+      </a>
+    </li>
+  </ul>
 </div>

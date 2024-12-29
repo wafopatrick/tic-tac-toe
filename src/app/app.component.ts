@@ -3,15 +3,20 @@ import { GameService } from './services/game.service';
 import { MenuComponent } from './components/menu/menu.component';
 import { BoardComponent } from './components/board/board.component';
 import { GameMode, AILevel } from './constants';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [MenuComponent, BoardComponent],
+  imports: [MenuComponent, BoardComponent, FormsModule, CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  GameMode = GameMode;
+  AILevel = AILevel;
+
   constructor(public gameService: GameService) {}
 
   gameMode: GameMode = GameMode.HumanVsHuman; // Default to Human vs Human
@@ -27,5 +32,11 @@ export class AppComponent {
     if (this.gameMode === GameMode.HumanVsAI) {
       this.gameService.setAILevel(this.aiLevel);
     }
+  }
+
+  // Handle AI level change
+  onAILevelChange(level: AILevel) {
+    this.aiLevel = level;
+    this.gameService.setAILevel(this.aiLevel);
   }
 }
