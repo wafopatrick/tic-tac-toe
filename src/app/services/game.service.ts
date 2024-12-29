@@ -77,6 +77,7 @@ export class GameService {
     // Check for a winner after the move
     if (this.checkWinner()) {
       this.winner = 'O';
+      return;
     }
 
     // Switch back to player X
@@ -221,6 +222,7 @@ export class GameService {
       return true;
     }
 
+    this.winningCells = []; // Reset winning cells if no winner
     return false;
   }
 

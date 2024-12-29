@@ -1,25 +1,26 @@
 <div class="flex justify-center mt-4">
   <!-- Board Container: A 3x3 grid using CSS Grid -->
-  <div class="grid grid-cols-3 w-64">
+  <div class="grid grid-cols-3 gap-0 w-72">
     <!-- Loop through rows -->
     <ng-container *ngFor="let row of gameService.board; let rowIndex = index">
       <!-- Loop through columns in each row -->
-      <button
-        *ngFor="let cell of row; let colIndex = index"
-        class="w-24 h-24 flex items-center justify-center border-2 border-gray-400 bg-white cursor-pointer"
-        (click)="onCellClick(rowIndex, colIndex)"
-        (keydown)="onKeyDown($event, rowIndex, colIndex)"
-        [ngClass]="{
-          'bg-gray-300': cell === 'X',
-          'bg-gray-500': cell === 'O',
-          'bg-green-500': gameService.winner && gameService.isWinningCell(rowIndex, colIndex),
-          'border-blue-500': rowIndex === selectedRow && colIndex === selectedCol
-        }"
-        [attr.aria-label]="'Cell ' + rowIndex + ',' + colIndex"
-        tabindex="0"
-      >
-        {{ cell }}
-      </button>
+      <ng-container *ngFor="let cell of row; let colIndex = index">
+        <button
+          class="w-24 h-24 flex items-center justify-center border-2 border-gray-400 cursor-pointer"
+          (click)="onCellClick(rowIndex, colIndex)"
+          (keydown)="onKeyDown($event, rowIndex, colIndex)"
+          [ngClass]="{
+            'bg-gray-300': cell === 'X' && !gameService.isWinningCell(rowIndex, colIndex),
+            'bg-gray-500': cell === 'O' && !gameService.isWinningCell(rowIndex, colIndex),
+            'bg-green-500': gameService.isWinningCell(rowIndex, colIndex),
+            'border-blue-500': rowIndex === selectedRow && colIndex === selectedCol
+          }"
+          [attr.aria-label]="'Cell ' + rowIndex + ',' + colIndex"
+          tabindex="0"
+        >
+          {{ cell }}
+        </button>
+      </ng-container>
     </ng-container>
   </div>
 </div>
