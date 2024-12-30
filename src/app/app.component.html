@@ -1,7 +1,12 @@
-<div class="flex min-h-screen">
+<div class="flex min-h-screen relative">
     <!-- Navigation Menu for Game Mode -->
-    <div class="p-4 fixed top-0 left-0">
+    <div class="absolute top-0 left-0 p-4">
         <app-menu (gameModeChange)="onGameModeChange($event)"></app-menu>
+    </div>
+
+    <!-- Login Component -->
+    <div class="absolute top-0 right-0 p-4">
+        <app-login></app-login>
     </div>
 
     <!-- Main Content -->
@@ -24,6 +29,11 @@
                         (change)="onAILevelChange(AILevel.Hard)" />
                     Hard
                 </label>
+            </div>
+
+            <!-- Player Names (only visible when 'Human vs Human' is selected) -->
+            <div *ngIf="gameMode === GameMode.HumanVsHuman" class="text-center text-xl font-bold mt-4">
+                <p>X {{ playerXName }} vs O {{ playerOName }}</p>
             </div>
 
             <!-- Board Component -->
