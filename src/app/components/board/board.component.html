@@ -1,12 +1,12 @@
 <div class="flex justify-center mt-4">
   <!-- Board Container: A 3x3 grid using CSS Grid -->
-  <div class="grid grid-cols-3 gap-0 w-120">
+  <div class="board-container grid grid-cols-3 gap-0 w-full">
     <!-- Loop through rows -->
     <ng-container *ngFor="let row of gameService.board; let rowIndex = index">
       <!-- Loop through columns in each row -->
       <ng-container *ngFor="let cell of row; let colIndex = index">
         <button
-          class="w-40 h-40 flex items-center justify-center border-2 border-gray-400 cursor-pointer"
+          class="board-cell w-full aspect-square flex items-center justify-center border-2 border-gray-400 cursor-pointer"
           (click)="onCellClick(rowIndex, colIndex)"
           (keydown)="onKeyDown($event, rowIndex, colIndex)"
           [ngClass]="{
@@ -28,7 +28,7 @@
 <div class="flex justify-center mt-4">
   <!-- Reset button -->
   <button
-    class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+    class="reset-button px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
     (click)="resetGame()"
   >
     Reset Game

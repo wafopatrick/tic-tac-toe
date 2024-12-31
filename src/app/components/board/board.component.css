@@ -1,0 +1,53 @@
+.board-cell {
+  font-size: 6vw;
+  height: 24vw;
+  width: 24vw;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .board-cell {
+    font-size: 6vw;
+    height: 14vw;
+    width: 14vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .board-cell {
+    font-size: 6vw;
+    height: 12vw;
+    width: 12vw;
+  }
+}
+
+.board-container {
+  max-width: 70vw;
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .board-container {
+    max-width: 70vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .board-container {
+    max-width: 50vw;
+  }
+}
+
+.reset-button {
+  font-size: 4vw;
+}
+
+@media (min-width: 640px) {
+  .reset-button {
+    font-size: 2vw;
+  }
+}
+
+@media (min-width: 1024px) {
+  .reset-button {
+    font-size: 1vw;
+  }
+}
