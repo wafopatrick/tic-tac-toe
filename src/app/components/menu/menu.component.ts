@@ -14,10 +14,17 @@ export class MenuComponent {
 
   gameModes = [GameMode.HumanVsHuman, GameMode.HumanVsAI];
   selectedMode: GameMode = GameMode.HumanVsHuman; // Default game mode
+  menuOpen: boolean = false; // Toggle menu visibility
 
   // Emit the selected game mode
   selectMode(mode: GameMode) {
     this.selectedMode = mode;
     this.gameModeChange.emit({ mode });
+    this.menuOpen = false; // Close the menu after selection
+  }
+
+  // Toggle menu visibility
+  toggleMenu() {
+    this.menuOpen = !this.menuOpen;
   }
 }
