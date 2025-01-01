@@ -17,6 +17,7 @@
           }"
           [attr.aria-label]="'Cell ' + rowIndex + ',' + colIndex"
           tabindex="0"
+          [disabled]="gameService.winner || gameService.isTie"
         >
           {{ cell }}
         </button>
@@ -35,7 +36,8 @@
   </button>
 </div>
 
-<!-- Show winner message if there is a winner -->
-<div *ngIf="gameService.winner" class="mt-4 text-center text-xl font-bold">
-  <p>{{ gameService.winner }} Wins!</p>
+<!-- Show winner or tie message if there is a winner or a tie -->
+<div *ngIf="gameService.winner || gameService.isTie" class="mt-4 text-center text-xl font-bold">
+  <p *ngIf="gameService.winner">{{ gameService.winner }} Wins!</p>
+  <p *ngIf="gameService.isTie">It's a Tie!</p>
 </div>

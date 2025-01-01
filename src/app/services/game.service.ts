@@ -11,12 +11,14 @@ export class GameService {
   gameMode: GameMode = GameMode.HumanVsHuman; // Default to playing against human
   aiLevel: AILevel = AILevel.Easy; // Default AI level
   winningCells: [number, number][] = []; // Track winning cells
+  isTie: boolean = false; // Track if the game is a tie
 
   initializeBoard() {
     this.board = [['', '', ''], ['', '', ''], ['', '', '']];
     this.winner = null;
     this.currentPlayer = 'X'; // Reset to Player X
     this.winningCells = []; // Reset winning cells
+    this.isTie = false; // Reset tie status
   }
 
   // Set the AI level (Easy, Medium, Hard)
@@ -31,7 +33,7 @@ export class GameService {
 
   // Handle a move by a player or AI
   onCellClick(row: number, col: number) {
-    if (this.board[row][col] || this.winner) return; // Do nothing if cell is occupied or game is over
+    if (this.board[row][col] || this.winner || this.isTie) return; // Do nothing if cell is occupied, game is over, or it's a tie
 
     // Player makes a move
     this.board[row][col] = this.currentPlayer;
@@ -39,6 +41,12 @@ export class GameService {
     // Check for a winner after the move
     if (this.checkWinner()) {
       this.winner = this.currentPlayer;
+      return;
+    }
+
+    // Check for a tie after the move
+    if (this.isBoardFull() || this.checkTie()) {
+      this.isTie = true;
       return;
     }
 
@@ -53,7 +61,7 @@ export class GameService {
 
   // AI makes a move based on the selected level
   makeAIMove() {
-    if (this.isBoardFull()) return; // Do nothing if the board is full
+    if (this.isBoardFull() || this.checkTie()) return; // Do nothing if the board is full or it's a tie
 
     let row = -1;
     let col = -1;
@@ -80,6 +88,12 @@ export class GameService {
     // Check for a winner after the move
     if (this.checkWinner()) {
       this.winner = 'O';
+      return;
+    }
+
+    // Check for a tie after the move
+    if (this.isBoardFull() || this.checkTie()) {
+      this.isTie = true;
       return;
     }
 
@@ -232,6 +246,27 @@ export class GameService {
   // Check if a cell is part of the winning combination
   isWinningCell(row: number, col: number): boolean {
     return this.winningCells.some(cell => cell[0] === row && cell[1] === col);
+  }
+
+  // Check for a tie before the board is full
+  checkTie(): boolean {
+    // Check if there are any possible winning moves left for both players
+    for (let row = 0; row < 3; row++) {
+      for (let col = 0; col < 3; col++) {
+        if (this.board[row][col] === '') {
+          this.board[row][col] = 'X';
+          const isWinnerX = this.checkWinner();
+          this.board[row][col] = 'O';
+          const isWinnerO = this.checkWinner();
+          this.board[row][col] = '';
+          if (isWinnerX || isWinnerO) {
+            this.winningCells = []; // Reset winning cells if no winner
+            return false;
+          }
+        }
+      }
+    }
+    return this.isBoardFull();
   }
 
   // Reset the game
