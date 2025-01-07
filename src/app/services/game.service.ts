@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GameMode, AILevel } from '../constants';
+import { AILevel } from '../constants';
+import { GameMode } from './game-mode.service';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service'; // Import the service
 import { CommonModule } from '@angular/common';
-import { GameMode, AILevel } from '../../constants';
+import { AILevel } from '../../constants';
+import { GameMode } from '../../services/game-mode.service';
 
 @Component({
   standalone: true,
