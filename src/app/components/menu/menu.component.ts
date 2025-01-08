@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterModule, NavigationEnd } from '@angular/router';
 import { GameModeService, GameMode } from '../../services/game-mode.service';
 import { GameService } from '../../services/game.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   standalone: true,
@@ -11,10 +12,10 @@ import { GameService } from '../../services/game.service';
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.css'],
 })
-export class MenuComponent {
+export class MenuComponent implements OnInit {
 
   gameModes = [GameMode.HumanVsHuman, GameMode.HumanVsAI];
-  selectedMode: GameMode | null = GameMode.HumanVsHuman; // Default game mode
+  selectedMode: GameMode | null = null; // Default game mode
   selectedRoom: string | null = null; // Track the selected room
   menuOpen: boolean = false; // Toggle menu visibility
 
@@ -23,6 +24,23 @@ export class MenuComponent {
     private readonly gameService: GameService,
     private readonly gameModeService: GameModeService
   ) {}
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      if (event.urlAfterRedirects.includes('create-room')) {
+        this.selectedRoom = 'create-room';
+        this.selectedMode = null;
+      } else if (event.urlAfterRedirects.includes('join-room')) {
+        this.selectedRoom = 'join-room';
+        this.selectedMode = null;
+      } else {
+        this.selectedRoom = null;
+        this.selectedMode = this.gameModeService.getGameMode();
+      }
+    });
+  }
 
   // Emit the selected game mode
   selectMode(mode: GameMode) {
@@ -43,6 +61,7 @@ export class MenuComponent {
   navigateTo(route: string) {
     this.selectedRoom = route; // Set the selected room
     this.selectedMode = null; // Reset selected mode
+    this.router.navigate([route]);
     this.menuOpen = false; // Close the menu after navigation
   }
 }
