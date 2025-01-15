@@ -37,4 +37,17 @@ export class MainContentComponent implements OnInit {
     this.aiLevel = level;
     this.gameService.setAILevel(this.aiLevel);
   }
+
+  // Reset the game
+  resetGame() {
+    this.gameService.resetGame();
+  }
+
+  // Select game mode
+  selectMode(mode: GameMode) {
+    this.gameMode = mode;
+    this.gameModeService.setGameMode(mode);
+    this.gameService.setGameMode(mode);
+    this.gameService.resetGame();
+  }
 }

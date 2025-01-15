@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { GameService } from '../../services/game.service'; // Import the service
 import { CommonModule } from '@angular/common';
 import { AILevel } from '../../constants';
-import { GameMode } from '../../services/game-mode.service';
+import { GameMode, GameModeService } from '../../services/game-mode.service';
 
 @Component({
   standalone: true,
@@ -15,10 +15,12 @@ export class BoardComponent implements OnInit {
   @Input() gameMode: GameMode = GameMode.HumanVsHuman; // Default to 'Human vs Human' if not passed
   @Input() aiLevel: AILevel = AILevel.Easy; // Default to 'Easy' if not passed
 
+  GameMode = GameMode; // Make GameMode available in the template
+
   selectedRow: number = 0; // Track the selected row (starting at the top-left cell)
   selectedCol: number = 0; // Track the selected column (starting at the top-left cell)
 
-  constructor(public gameService: GameService) {}
+  constructor(public gameService: GameService, private readonly gameModeService: GameModeService) {}
 
   ngOnInit() {
     this.gameService.initializeBoard();
@@ -62,6 +64,14 @@ export class BoardComponent implements OnInit {
 
   // Reset the game
   resetGame() {
+    this.gameService.resetGame();
+  }
+
+  // Select game mode
+  selectMode(mode: GameMode) {
+    this.gameMode = mode;
+    this.gameModeService.setGameMode(mode);
+    this.gameService.setGameMode(mode);
     this.gameService.resetGame();
   }
 }

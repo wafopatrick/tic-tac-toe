@@ -1,28 +1,41 @@
 <div class="flex flex-col items-center">
-    <!-- AI Level Selection (only visible when 'Human vs AI' is selected) -->
-    <div *ngIf="gameMode === GameMode.HumanVsAI" class="flex justify-center space-x-4 mt-4">
-        <label>
-            <input type="radio" name="aiLevel" [value]="AILevel.Easy" [(ngModel)]="aiLevel"
-                (change)="onAILevelChange(AILevel.Easy)" />
-            Easy
-        </label>
-        <label>
-            <input type="radio" name="aiLevel" [value]="AILevel.Medium" [(ngModel)]="aiLevel"
-                (change)="onAILevelChange(AILevel.Medium)" />
-            Medium
-        </label>
-        <label>
-            <input type="radio" name="aiLevel" [value]="AILevel.Hard" [(ngModel)]="aiLevel"
-                (change)="onAILevelChange(AILevel.Hard)" />
-            Hard
-        </label>
-    </div>
+    <!-- Top Section with AI Level Selection and Reset Button -->
+    <div class="flex justify-between items-center w-full px-4 mt-4">
+        <!-- AI Level Selection (only visible when 'Human vs AI' is selected) -->
+        <div *ngIf="gameMode === GameMode.HumanVsAI" class="flex space-x-4">
+            <label>
+                <input type="radio" name="aiLevel" [value]="AILevel.Easy" [(ngModel)]="aiLevel"
+                    (change)="onAILevelChange(AILevel.Easy)" />
+                Easy
+            </label>
+            <label>
+                <input type="radio" name="aiLevel" [value]="AILevel.Medium" [(ngModel)]="aiLevel"
+                    (change)="onAILevelChange(AILevel.Medium)" />
+                Medium
+            </label>
+            <label>
+                <input type="radio" name="aiLevel" [value]="AILevel.Hard" [(ngModel)]="aiLevel"
+                    (change)="onAILevelChange(AILevel.Hard)" />
+                Hard
+            </label>
+        </div>
 
-    <!-- Player Names (only visible when 'Human vs Human' is selected) -->
-    <div *ngIf="gameMode === GameMode.HumanVsHuman" class="text-center text-xl font-bold mt-4">
-        <p>X {{ playerXName }} vs O {{ playerOName }}</p>
+        <!-- Player Names (only visible when 'Human vs Human' is selected) -->
+        <div *ngIf="gameMode === GameMode.HumanVsHuman" class="text-center text-xl font-bold">
+            <p>X {{ playerXName }} vs O {{ playerOName }}</p>
+        </div>
+
+        <!-- Reset Button -->
+        <button
+            class="reset-button px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            (click)="resetGame()"
+        >
+            Reset Game
+        </button>
     </div>
 
     <!-- Board Component -->
-    <app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
+    <div class="flex justify-center mt-4">
+        <app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
+    </div>
 </div>

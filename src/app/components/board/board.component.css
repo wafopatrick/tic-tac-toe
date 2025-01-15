@@ -38,6 +38,9 @@
 
 .reset-button {
   font-size: 4vw;
+  position: absolute;
+  top: -3rem;
+  right: 0;
 }
 
 @media (min-width: 640px) {

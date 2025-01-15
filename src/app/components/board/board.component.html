@@ -1,4 +1,4 @@
-<div class="flex justify-center mt-4">
+<div class="flex justify-center mt-4 relative">
   <!-- Board Container: A 3x3 grid using CSS Grid -->
   <div class="board-container grid grid-cols-3 gap-0 w-full">
     <!-- Loop through rows -->
@@ -27,12 +27,20 @@
 </div>
 
 <div class="flex justify-center mt-4">
-  <!-- Reset button -->
+  <!-- Toggle buttons for game mode -->
   <button
-    class="reset-button px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-    (click)="resetGame()"
+    class="px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300"
+    [ngClass]="{ 'bg-blue-500 text-white': gameMode === GameMode.HumanVsHuman }"
+    (click)="selectMode(GameMode.HumanVsHuman)"
   >
-    Reset Game
+    Human vs Human
+  </button>
+  <button
+    class="ml-4 px-4 py-2 bg-gray-200 text-black rounded hover:bg-gray-300"
+    [ngClass]="{ 'bg-blue-500 text-white': gameMode === GameMode.HumanVsAI }"
+    (click)="selectMode(GameMode.HumanVsAI)"
+  >
+    Human vs AI
   </button>
 </div>
 
