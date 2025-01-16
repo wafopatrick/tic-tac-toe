@@ -37,20 +37,19 @@
 }
 
 .reset-button {
-  font-size: 4vw;
-  position: absolute;
-  top: -3rem;
-  right: 0;
+  background-color: #1d4ed8;
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@media (min-width: 640px) {
-  .reset-button {
-    font-size: 2vw;
-  }
+.reset-button:hover {
+  background-color: #2563eb;
 }
 
-@media (min-width: 1024px) {
-  .reset-button {
-    font-size: 1vw;
-  }
+.reset-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
 }

@@ -1,6 +1,6 @@
 <div class="flex flex-col items-center">
     <!-- Top Section with AI Level Selection and Reset Button -->
-    <div class="flex justify-between items-center w-full px-4 mt-4">
+    <div class="flex justify-between items-center w-full px-4">
         <!-- AI Level Selection (only visible when 'Human vs AI' is selected) -->
         <div *ngIf="gameMode === GameMode.HumanVsAI" class="flex space-x-4">
             <label>
@@ -27,15 +27,17 @@
 
         <!-- Reset Button -->
         <button
-            class="reset-button px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            class="reset-button w-10 h-10 bg-blue-500 text-white rounded-full flex items-center justify-center hover:bg-blue-600"
             (click)="resetGame()"
+            aria-label="Reset Game"
         >
-            Reset Game
+            <!-- Font Awesome Icon -->
+            <i class="fas fa-undo"></i>
         </button>
     </div>
 
     <!-- Board Component -->
-    <div class="flex justify-center mt-4">
+    <div class="flex justify-center">
         <app-board [gameMode]="gameMode" [aiLevel]="aiLevel"></app-board>
     </div>
 </div>
